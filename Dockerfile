@@ -18,3 +18,7 @@ EXPOSE 80
 
 # Start Apache
 CMD ["apache2-foreground"]
+
+# Expose uploads folder to web
+RUN mkdir -p /var/www/html/uploads
+COPY uploads /var/www/html/uploads
