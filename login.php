@@ -1,8 +1,9 @@
 <?php
 require 'includes/db.php';
-require 'includes/header.php';
+session_start(); // start before anything
 
 $message = '';
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
@@ -15,6 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_name'] = $user['name'];
         $_SESSION['user_photo'] = $user['profile_photo'];
+
+        // Redirect BEFORE including header.php or any HTML
         header("Location: index.php");
         exit;
     } else {
@@ -22,6 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
+
+<?php require 'includes/header.php'; ?>
 
 <style>
 body {

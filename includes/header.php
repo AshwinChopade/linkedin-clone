@@ -1,10 +1,16 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) session_start();
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 
-function is_logged_in() { return isset($_SESSION['user_id']); }
-function current_user_name() { return $_SESSION['user_name'] ?? ''; }
+function is_logged_in() {
+  return isset($_SESSION['user_id']);
+}
+
+function current_user_name() {
+  return $_SESSION['user_name'] ?? '';
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,7 +88,6 @@ body {
 
 <div class="header">
   <h1>LinkedIn Clone</h1>
-
   <div class="header-nav">
     <?php if (is_logged_in()): ?>
       <div class="nav-user">
