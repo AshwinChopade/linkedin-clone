@@ -1,13 +1,19 @@
-# Use the official PHP image with Apache
+# Use the official PHP-Apache image
 FROM php:8.2-apache
 
-# Copy project files into the container
+# Copy project files to the web root
 COPY . /var/www/html/
 
-# Install PDO MySQL extension
+# Enable PDO MySQL extension
 RUN docker-php-ext-install pdo pdo_mysql
 
-# Expose port 80 for the web server
+# Set working directory
+WORKDIR /var/www/html
+
+# Make sure uploads folder is accessible
+RUN mkdir -p /var/www/html/uploads && chmod -R 755 /var/www/html/uploads
+
+# Expose port 80
 EXPOSE 80
 
 # Start Apache
